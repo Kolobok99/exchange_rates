@@ -94,3 +94,43 @@ class CurrencyAPITest(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class JWTAuthenticationAPITest(APITestCase):
+    """Класс тестирования JWT аутентификации"""
+
+    def setUp(self) -> None:
+        self.test_user = User.objects.create_user(
+            username='test_user',
+            password='test_password',
+            email='test_email',
+            is_active=True,
+        )
+        self.test_user_pass = 'test_password'
+
+    def test_getting_token_by_valid_data(self):
+        """Тест: получение jwt токена по валидным данным user'а"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+        response = self.client.post(url, data=user_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(True, 'refresh' in response.data)
+
+
+    def test_getting_token_by_INvalid_data(self):
+        """Тест: получение jwt токена по НЕвалидным данным user'а"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': 'wrong_password',
+        }
+        error_authorization_message = 'No Active Account Found With The Given Credentials'
+
+        response = self.client.post(url, data=user_data)
+        print(response.data)
+        self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
+        self.assertEqual(error_authorization_message, response.data['detail'].title())
