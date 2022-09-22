@@ -10,3 +10,5 @@
 /log.log
 /exchange_rate/log.log
 logs/
+/exchange_rate/dev_req.txt
+/exchange_rate/static/

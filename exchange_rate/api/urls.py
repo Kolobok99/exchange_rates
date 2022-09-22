@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from . import views
 
 urlpatterns = [
-    path('currencies/', views.CurrencyAPIViewSet.as_view({'get': 'list'}), name='currency-list'),
+    path('currencies1/', views.CurrencyAPIViewSet.as_view({'get': 'list'}), name='currency-list'),
     path('currency/<int:pk>', views.CurrencyAPIViewSet.as_view({'get': 'retrieve'}), name='currency-retrieve'),
 
     path('api-token-auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
