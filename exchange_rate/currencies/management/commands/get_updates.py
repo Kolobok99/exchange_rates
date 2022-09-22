@@ -4,7 +4,7 @@ from currencies.models import Currency
 from services.services import get_exchange_rates_from_cbr_ru
 
 
-# from currencies.models import Currency
+# from tests_currencies.models import Currency
 # from services.services import get_exchange_rates_from_cbr_ru
 
 

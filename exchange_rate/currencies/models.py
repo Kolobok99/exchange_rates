@@ -13,7 +13,3 @@ class Currency(models.Model):
     class Meta:
         verbose_name = 'валюта'
         verbose_name_plural = 'валюты'
-
-
-class TestModel(models.Model):
-    name = models.CharField(max_length=32)
