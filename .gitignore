@@ -7,3 +7,4 @@
 /.idea/workspace.xml
 
 /exchange_rate/db.sqlite3
+/log.log

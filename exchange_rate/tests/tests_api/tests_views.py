@@ -11,7 +11,6 @@ from currencies.models import Currency
 class CurrencyAPITest(APITestCase):
     """Класс тестирования CurrencyAPIViewSet"""
 
-
     def setUp(self) -> None:
 
         currencies_data = [
@@ -31,7 +30,6 @@ class CurrencyAPITest(APITestCase):
 
         )
 
-
     def test_list_currency_by_unauthorized_user(self):
         """Тест: отправка list-запроса от неваторизированного user'а"""
 
@@ -39,7 +37,6 @@ class CurrencyAPITest(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
-
 
     def test_list_currency(self):
         """Тест: отправка list-запроса"""
@@ -62,7 +59,6 @@ class CurrencyAPITest(APITestCase):
 
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
 
-
     def test_retrieve_currency_with_valid_pk(self):
         """Тест: отправка retrieve-запроса c валидным PK"""
 
@@ -81,7 +77,6 @@ class CurrencyAPITest(APITestCase):
 
         self.assertEqual(instance.rate, response.data['rate'])
 
-
     def test_retrieve_currency_with_INvalid_pk(self):
         """Тест: отправка retrieve-запроса c НЕ_валидным PK"""
 
@@ -95,6 +90,7 @@ class CurrencyAPITest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
+
 class JWTAuthenticationAPITest(APITestCase):
     """Класс тестирования JWT аутентификации"""
 
@@ -107,18 +103,19 @@ class JWTAuthenticationAPITest(APITestCase):
         )
         self.test_user_pass = 'test_password'
 
+        self.test_user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+
     def test_getting_token_by_valid_data(self):
         """Тест: получение jwt токена по валидным данным user'а"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+
+        response = self.client.post(url, data=self.test_user_data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(True, 'refresh' in response.data)
-
 
     def test_getting_token_by_INvalid_data(self):
         """Тест: получение jwt токена по НЕвалидным данным user'а"""
@@ -139,11 +136,8 @@ class JWTAuthenticationAPITest(APITestCase):
         """Тест: обновление access-токена по валидному refresh-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+
+        response = self.client.post(url, data=self.test_user_data)
         initial_refresh_token = response.data['refresh']
         initial_access_token = response.data['access']
 
@@ -158,16 +152,12 @@ class JWTAuthenticationAPITest(APITestCase):
         self.assertEqual(True, 'access' in response.data)
         self.assertNotEqual(initial_access_token, response.data['access'])
 
-
     def test_update_access_token_by_INvalid_refresh_token(self):
         """Тест: обновление access-токена по НЕвалидному refresh-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+
+        response = self.client.post(url, data=self.test_user_data)
         initial_refresh_token = response.data['refresh']
         initial_access_token = response.data['access']
 
@@ -187,11 +177,8 @@ class JWTAuthenticationAPITest(APITestCase):
         """Тест: верификация access-токена по валидному access-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+
+        response = self.client.post(url, data=self.test_user_data)
         initial_access_token = response.data['access']
 
         url = reverse('token_verify')
@@ -203,16 +190,11 @@ class JWTAuthenticationAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(0, len(response.data))
 
-
     def test_verify_access_token_by_INvalid_access_token(self):
         """Тест: верификация access-токена по НЕвалидному access-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+        response = self.client.post(url, data=self.test_user_data)
         initial_access_token = response.data['access']
 
         url = reverse('token_verify')
@@ -230,11 +212,7 @@ class JWTAuthenticationAPITest(APITestCase):
         """Тест: верификация refresh-токена по валидному refresh-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+        response = self.client.post(url, data=self.test_user_data)
         initial_refresh_token = response.data['refresh']
 
         url = reverse('token_verify')
@@ -250,11 +228,7 @@ class JWTAuthenticationAPITest(APITestCase):
         """Тест: верификация refresh-токена по НЕвалидному refresh-токену"""
 
         url = reverse('token_obtain_pair')
-        user_data = {
-            'username': self.test_user.username,
-            'password': self.test_user_pass,
-        }
-        response = self.client.post(url, data=user_data)
+        response = self.client.post(url, data=self.test_user_data)
         initial_refresh_token = response.data['refresh']
 
         url = reverse('token_verify')
