@@ -2,8 +2,6 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-from services.logger_formatters import CustomJsonFormatter
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -168,36 +166,69 @@ SIMPLE_JWT = {
 
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#
+#     'formatters': {
+#         'main_formatter': {
+#             "format": "{asctime} - {levelname} - {module} - {message}",
+#             "style": "{"
+#         },
+#         'json_formatter': {
+#             '()': CustomJsonFormatter
+#         }
+#     },
+#
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'main_formatter',
+#         },
+#         'file': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'json_formatter',
+#             'filename': 'log.log'
+#         },
+#     },
+#     'loggers': {
+#         'main': {
+#             'handlers': ['console', 'file'],
+#             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#             'propagate': False,
+#         },
+#     },
+# }
 
-    'formatters': {
-        'main_formatter': {
-            "format": "{asctime} - {levelname} - {module} - {message}",
-            "style": "{"
-        },
-        'json_formatter': {
-            '()': CustomJsonFormatter
-        }
-    },
+from loguru import logger
 
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'main_formatter',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'formatter': 'json_formatter',
-            'filename': 'log.log'
-        },
-    },
-    'loggers': {
-        'main': {
-            'handlers': ['console', 'file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-            'propagate': False,
-        },
-    },
-}
+logger.add(
+    "logs/log.json",
+    format="{time} - {level} - {file} - {module} - {message}",
+    level=os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+    rotation="10 MB",
+    compression="zip",
+    serialize=True,
+)
+
+logger.add(
+    "logs/log.log",
+    format="{time} - {level} - {file} - {module} - {message}",
+    level=os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+    rotation="10 MB",
+    compression="zip",
+    serialize=False,
+    backtrace=False,
+    diagnose=False
+)
+
+logger.add(
+    "logs/log_full_traceback.log",
+    format="{time} - {level} - {file} - {module} - {message}",
+    level=os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+    rotation="10 MB",
+    compression="zip",
+    serialize=False,
+    backtrace=True,
+    diagnose=True
+)

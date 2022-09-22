@@ -13,3 +13,4 @@ class Currency(models.Model):
     class Meta:
         verbose_name = 'валюта'
         verbose_name_plural = 'валюты'
+
