@@ -1,6 +1,3 @@
-from decimal import Decimal
-
-from django.db import IntegrityError
 from django.test import TestCase
 
 from api.serializers import CurrencySerializer

@@ -12,4 +12,3 @@ urlpatterns = [
     path('api-token-auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
-
