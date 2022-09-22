@@ -1,14 +1,5 @@
-/.idea/exchange_rate_project.iml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/vcs.xml
-/.idea/workspace.xml
-
+/.idea/
 /exchange_rate/db.sqlite3
-/log.log
-/exchange_rate/log.log
 logs/
 /exchange_rate/dev_req.txt
 /exchange_rate/static/
