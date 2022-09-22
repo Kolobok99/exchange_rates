@@ -2,6 +2,8 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from services.logger_formatters import CustomJsonFormatter
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -171,36 +173,30 @@ LOGGING = {
     'disable_existing_loggers': False,
 
     'formatters': {
-        'main_format': {
-            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
+        'main_formatter': {
+            "format": "{asctime} - {levelname} - {module} - {message}",
             "style": "{"
         },
+        'json_formatter': {
+            '()': CustomJsonFormatter
+        }
     },
 
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'main_format',
+            'formatter': 'main_formatter',
         },
         'file': {
             'class': 'logging.FileHandler',
-            'formatter': 'main_format',
+            'formatter': 'json_formatter',
             'filename': 'log.log'
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
-    },
     'loggers': {
-        'DEV': {
+        'main': {
             'handlers': ['console', 'file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL_DEV', 'DEBUG'),
-            'propagate': False,
-        },
-        'PROD': {
-            'handlers': ['console', 'file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL_PROD', 'INFO'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
             'propagate': False,
         },
     },
