@@ -3,3 +3,4 @@
 logs/
 /exchange_rate/dev_req.txt
 /exchange_rate/static/
+/exchange_rate/.env_files/.env.prod/
