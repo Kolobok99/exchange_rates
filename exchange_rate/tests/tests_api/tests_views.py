@@ -178,7 +178,93 @@ class JWTAuthenticationAPITest(APITestCase):
         error_updating_token_message = 'Token Is Invalid Or Expired'
 
         response = self.client.post(path=url, data=token_data)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(False, 'access' in response.data)
         self.assertEqual(error_updating_token_message, response.data['detail'].title())
+
+    def test_verify_access_token_by_valid_access_token(self):
+        """Тест: верификация access-токена по валидному access-токену"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+        response = self.client.post(url, data=user_data)
+        initial_access_token = response.data['access']
+
+        url = reverse('token_verify')
+        token_data = {
+            'token': initial_access_token
+        }
+
+        response = self.client.post(path=url, data=token_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(0, len(response.data))
+
+
+    def test_verify_access_token_by_INvalid_access_token(self):
+        """Тест: верификация access-токена по НЕвалидному access-токену"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+        response = self.client.post(url, data=user_data)
+        initial_access_token = response.data['access']
+
+        url = reverse('token_verify')
+        token_data = {
+            'token': initial_access_token + 'error'
+        }
+        error_verify_token_message = 'Token Is Invalid Or Expired'
+
+        response = self.client.post(path=url, data=token_data)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(error_verify_token_message, response.data['detail'].title())
+
+    def test_verify_refresh_token_by_valid_refresh_token(self):
+        """Тест: верификация refresh-токена по валидному refresh-токену"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+        response = self.client.post(url, data=user_data)
+        initial_refresh_token = response.data['refresh']
+
+        url = reverse('token_verify')
+        token_data = {
+            'token': initial_refresh_token
+        }
+
+        response = self.client.post(path=url, data=token_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(0, len(response.data))
+
+    def test_refresh_access_token_by_INvalid_refresh_token(self):
+        """Тест: верификация refresh-токена по НЕвалидному refresh-токену"""
+
+        url = reverse('token_obtain_pair')
+        user_data = {
+            'username': self.test_user.username,
+            'password': self.test_user_pass,
+        }
+        response = self.client.post(url, data=user_data)
+        initial_refresh_token = response.data['refresh']
+
+        url = reverse('token_verify')
+        token_data = {
+            'token': initial_refresh_token + 'error'
+        }
+        error_verify_token_message = 'Token Is Invalid Or Expired'
+
+        response = self.client.post(path=url, data=token_data)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(error_verify_token_message, response.data['detail'].title())
+
