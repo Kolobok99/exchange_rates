@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.utils.serializer_helpers import ReturnDict
 
-from apps.currencies import Currency
+from apps.currencies.models import Currency
 
 
 class CurrencyAPITest(APITestCase):
@@ -124,10 +124,9 @@ class JWTAuthenticationAPITest(APITestCase):
             'username': self.test_user.username,
             'password': 'wrong_password',
         }
-        error_authorization_message = 'No Active Account Found With The Given Credentials'
+        error_authorization_message = 'Не Найдено Активной Учетной Записи С Указанными Данными'
 
         response = self.client.post(url, data=user_data)
-        print(response.data)
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
         self.assertEqual(error_authorization_message, response.data['detail'].title())
 
@@ -164,7 +163,7 @@ class JWTAuthenticationAPITest(APITestCase):
         token_data = {
             'refresh': initial_refresh_token + 'error'
         }
-        error_updating_token_message = 'Token Is Invalid Or Expired'
+        error_updating_token_message = 'Токен Недействителен Или Просрочен'
 
         response = self.client.post(path=url, data=token_data)
 
@@ -200,7 +199,7 @@ class JWTAuthenticationAPITest(APITestCase):
         token_data = {
             'token': initial_access_token + 'error'
         }
-        error_verify_token_message = 'Token Is Invalid Or Expired'
+        error_verify_token_message = 'Токен Недействителен Или Просрочен'
 
         response = self.client.post(path=url, data=token_data)
 
@@ -234,7 +233,7 @@ class JWTAuthenticationAPITest(APITestCase):
         token_data = {
             'token': initial_refresh_token + 'error'
         }
-        error_verify_token_message = 'Token Is Invalid Or Expired'
+        error_verify_token_message = 'Токен Недействителен Или Просрочен'
 
         response = self.client.post(path=url, data=token_data)
 

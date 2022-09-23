@@ -4,8 +4,9 @@ from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
-from apps.currencies import Currency
+
 from .serializers import CurrencySerializer
+from apps.currencies.models import Currency
 
 logger = logging.getLogger('main')
 

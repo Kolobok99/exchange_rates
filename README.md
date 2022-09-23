@@ -106,6 +106,11 @@ B. Запуск в режиме производства
 
            docker-compose -f prod_docker-compose.yml up
 
+Запуск тестов
+---
+
+           python manage.py test
+
 
 Документация API:
 ---

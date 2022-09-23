@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from apps.api.serializers import CurrencySerializer
-from apps.currencies import Currency
+from apps.currencies.models import Currency
 
 
 class CurrencySerializerTestCase(TestCase):
@@ -29,7 +29,6 @@ class CurrencySerializerTestCase(TestCase):
     def test_name_field_content(self):
         """Тест: сериализатор содежрит ожидаемое значение для 'name'"""
         data = self.serializer.data
-        print(data)
         self.assertEqual(data['name'], self.currency_attributes['name'])
 
     def test_rate_field_content(self):
