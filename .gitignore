@@ -1,6 +1,6 @@
 /.idea/
-/exchange_rate/db.sqlite3
+/exchange_rates/db.sqlite3
 logs/
-/exchange_rate/dev_req.txt
-/exchange_rate/static/
-/exchange_rate/.env_files/.env.prod/
+/exchange_rates/dev_req.txt
+/exchange_rates/static/
+/exchange_rates/.env_files/.env.prod/

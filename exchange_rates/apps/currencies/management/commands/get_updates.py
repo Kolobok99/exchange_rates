@@ -1,8 +1,7 @@
-import logging
 from django.core.management import BaseCommand
 
 
-from currencies.models import Currency
+from apps.currencies.models import Currency
 from services.logger_services import logger_wraps
 from services.services import get_exchange_rates_from_cbr_ru
 

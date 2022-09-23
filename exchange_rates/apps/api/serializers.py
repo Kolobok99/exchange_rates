@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from currencies.models import Currency
+from apps.currencies import Currency
 
 
 class CurrencySerializer(serializers.ModelSerializer):

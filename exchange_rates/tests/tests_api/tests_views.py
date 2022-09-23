@@ -1,11 +1,10 @@
 from django.contrib.auth.models import User
-from django.db.models import Model
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase, force_authenticate
+from rest_framework.test import APITestCase
 from rest_framework.utils.serializer_helpers import ReturnDict
 
-from currencies.models import Currency
+from apps.currencies import Currency
 
 
 class CurrencyAPITest(APITestCase):

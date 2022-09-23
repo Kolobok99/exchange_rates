@@ -6,7 +6,6 @@ def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
 
     def wrapper(func):
         name = func.__name__
-        print(dir(func))
         file = func.__module__
 
         @functools.wraps(func)

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from api.serializers import CurrencySerializer
-from currencies.models import Currency
+from apps.api.serializers import CurrencySerializer
+from apps.currencies import Currency
 
 
 class CurrencySerializerTestCase(TestCase):

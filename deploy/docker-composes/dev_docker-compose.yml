@@ -6,8 +6,8 @@ volumes:
 services:
   web:
     build:
-      context: ../exchange_rate
-      dockerfile: ../exchange_rate/Dockerfile.dev
+      context: ../../exchange_rates
+      dockerfile: ../../exchange_rates/Dockerfile.dev
     command: bash -c "
       python manage.py migrate
       && python manage.py collectstatic --noinput
@@ -17,9 +17,9 @@ services:
     expose:
       - 8000
     env_file:
-      - ../exchange_rate/.env_files/.env.dev/.env.dev.settings
+      - ../../exchange_rates/.env_files/.env.dev/.env.dev.settings
     volumes:
-      - ../exchange_rate:/app
+      - ../exchange_rates:/app
     depends_on:
       - db
     restart: always
@@ -32,7 +32,7 @@ services:
     ports:
       - '3306:3306'
     env_file:
-      - ../exchange_rate/.env_files/.env.dev/.env.dev.db
+      - ../../exchange_rates/.env_files/.env.dev/.env.dev.db
 
   nginx:
     build: ../nginx_files/nginx.dev
@@ -41,5 +41,5 @@ services:
     depends_on:
       - web
     volumes:
-      - ../exchange_rate/static:/app/static
+      - ../exchange_rates/static:/app/static
     restart: always

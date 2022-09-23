@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from currencies.models import Currency
+from apps.currencies import Currency
 
 
 class CurrencyModelTestCase(TestCase):

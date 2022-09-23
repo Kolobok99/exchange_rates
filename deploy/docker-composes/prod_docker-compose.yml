@@ -10,8 +10,8 @@ volumes:
 services:
   web:
     build:
-      context: ../exchange_rate
-      dockerfile: ../exchange_rate/Dockerfile.prod
+      context: ../../exchange_rates
+      dockerfile: ../../exchange_rates/Dockerfile.prod
     command: bash -c "
       python manage.py migrate
       && python manage.py collectstatic --noinput
@@ -24,7 +24,7 @@ services:
     expose:
       - 8000
     env_file:
-      - ../exchange_rate/.env_files/.env.prod/.env.prod.settings
+      - ../../exchange_rates/.env_files/.env.prod/.env.prod.settings
     depends_on:
       - db
     restart: always
@@ -37,7 +37,7 @@ services:
     ports:
       - '3306:3306'
     env_file:
-      - ../exchange_rate/.env_files/.env.prod/.env.prod.db
+      - ../../exchange_rates/.env_files/.env.prod/.env.prod.db
     restart: always
 
 
