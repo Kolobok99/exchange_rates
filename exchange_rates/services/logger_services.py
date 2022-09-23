@@ -3,6 +3,7 @@ from loguru import logger
 
 
 def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
+    """Декоратор, создающий логи starting и ending у функции с уровнем DEBUG"""
 
     def wrapper(func):
         name = func.__name__

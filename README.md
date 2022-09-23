@@ -84,6 +84,7 @@ B. Запуск в режиме производства
            echo SECRET_KEY=your_secret_key >> .env.prod.settings
            echo DJANGO_ALLOWED_HOSTS=your_host_ip >> .env.prod.settings
            echo TIME_ZONE=your_time_zone_name >> .env.prod.settings		
+           echo DJANGO_LOG_LEVEL=WARNING >> .env.prod.settings
 
            echo SQL_ENGINE=django.db.backends.mysql >> .env.prod.settings
            echo SQL_NAME=your_sql_name >> .env.prod.settings

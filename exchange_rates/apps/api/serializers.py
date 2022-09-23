@@ -4,7 +4,7 @@ from apps.currencies.models import Currency
 
 
 class CurrencySerializer(serializers.ModelSerializer):
-    """Сериализатор модели Currency"""
+    """READ_ONLY Сериализатор модели Currency"""
 
     class Meta:
         model = Currency

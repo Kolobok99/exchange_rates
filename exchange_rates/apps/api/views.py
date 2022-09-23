@@ -1,16 +1,12 @@
-import logging
-
-from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import GenericViewSet
-
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from .serializers import CurrencySerializer
 from apps.currencies.models import Currency
+from core.settings import logger
 
-logger = logging.getLogger('main')
-
-class CurrencyAPIViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet):
+class CurrencyAPIViewSet(ReadOnlyModelViewSet):
+    """READ_ONLY APISet модели Currency"""
 
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer

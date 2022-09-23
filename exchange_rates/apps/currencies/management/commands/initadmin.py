@@ -7,6 +7,8 @@ from core import settings
 class Command(BaseCommand):
     help = 'Создает админа (root:root)'
     def handle(self, *args, **options):
+        """Создает админа, если в БД нет ни одного user(is_superuser=True)"""
+
         if not User.objects.filter(is_superuser=True):
             admin = User.objects.create_superuser(
                 username='root',
