@@ -9,6 +9,8 @@ stages:
 test:
   stage: test
   before_script:
+    - usermod -aG docker gitlab-runner
     - systemctl status docker
+    - sudo service docker restart
   script:
     - docker run hello-world
