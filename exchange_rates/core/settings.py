@@ -61,24 +61,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.mysql'),
+        'NAME': os.environ.get('SQL_NAME', default='db'),
+        'USER': os.environ.get('SQL_USER', default='root'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', default='rootroot'),
+        'HOST': os.environ.get('SQL_HOST', default='localhost'),
+        'PORT': os.environ.get('SQL_PORT', default='3306'),
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.mysql'),
-#         'NAME': os.environ.get('SQL_NAME', default='db'),
-#         'USER': os.environ.get('SQL_USER', default='root'),
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', default='rootroot'),
-#         'HOST': os.environ.get('SQL_HOST', default='localhost'),
-#         'PORT': os.environ.get('SQL_PORT', default='3306'),
-#     }
-# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
