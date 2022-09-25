@@ -8,5 +8,7 @@ stages:
 
 test:
   stage: test
+  before_script:
+    - systemctl status docker
   script:
     - docker-compose -f infra/docker-composes/dev_docker-compose.yml build test
