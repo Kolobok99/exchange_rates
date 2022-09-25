@@ -9,4 +9,4 @@ stages:
 build:
   stage: build
   script:
-    - echo "IMAGE_APP_TAG=$STAGE_IMAGE_APP_TAG"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
