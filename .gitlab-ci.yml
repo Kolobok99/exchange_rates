@@ -9,7 +9,7 @@ stages:
 
 before_script:
     # установка pip
-    - apk add --no-cache py-pip
+    - apt install --no-cache py-pip
     # установка docker-compose
     - pip install docker-compose
     # логин в Gitlab Docker registry
