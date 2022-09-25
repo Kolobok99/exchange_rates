@@ -1,5 +1,6 @@
 image: docker-compose:latest
-
+services:
+  - docker:dind
 stages:
   - build
   - test
@@ -8,9 +9,9 @@ stages:
 
 test:
   stage: test
-  before_script:
-    - sudo usermod -aG docker gitlab-runner
-    - sudo systemctl status docker
-    - sudo service docker restart
+#  before_script:
+#    - sudo usermod -aG docker gitlab-runner
+#    - sudo systemctl status docker
+#    - sudo service docker restart
   script:
-    - sudo docker run hello-world
+    - docker run hello-world
