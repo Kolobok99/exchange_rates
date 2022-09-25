@@ -9,6 +9,7 @@ volumes:
 
 services:
   web:
+    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../../exchange_rates
       dockerfile: ../../exchange_rates/Dockerfile.prod
@@ -39,6 +40,11 @@ services:
     env_file:
       - ../../exchange_rates/.env_files/.env.prod/.env.prod.db
     restart: always
+
+  test:
+    image: https://gitlab.com/izolotavin99/exchange_rates_project
+    command: python manage.py test
+    restart: "no"
 
 
   nginx:
