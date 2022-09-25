@@ -1,6 +1,6 @@
 image: docker:latest
 services:
-    - docker:bind
+    - docker:dind
 
 stages:
   - build
@@ -9,9 +9,9 @@ stages:
 
 before_script:
     # установка pip
-    - apt install --no-cache py-pip
+#    - apt install --no-cache py-pip
     # установка docker-compose
-    - pip install docker-compose
+#    - pip install docker-compose
     # логин в Gitlab Docker registry
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
