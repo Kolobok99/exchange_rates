@@ -9,4 +9,4 @@ stages:
 test:
   stage: test
   script:
-    - docker-compose -f infra/docker-composes/prod_docker-compose.yml build test
+    - docker-compose -f infra/docker-composes/dev_docker-compose.yml build test
