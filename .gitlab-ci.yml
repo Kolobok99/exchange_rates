@@ -7,11 +7,12 @@ stages:
   - deploy
 
 
-test:
-  stage: test
-#  before_script:
-#    - sudo usermod -aG docker gitlab-runner
-#    - sudo systemctl status docker
-#    - sudo service docker restart
+
+build:
+  stage: build
   script:
-    - docker run hello-world
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
+    - docker-compose -f prod_docker_compose.yml build
+    - docker-compose -f prod_docker_compose.yml push
+
+

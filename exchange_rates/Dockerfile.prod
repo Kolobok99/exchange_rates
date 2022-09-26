@@ -8,7 +8,8 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && \
     apt-get -y install \
     default-libmysqlclient-dev \
-    python3-dev
+    python3-dev &&\
+    rm -rf /var/lib/apt/lists/*
 
 COPY req.txt .
 
@@ -39,7 +40,8 @@ COPY --from=builder /app/wheels /wheels
 COPY --from=builder /app/req.txt .
 
 RUN apt-get update && \
-    pip install --no-cache /wheels/*
+    pip install --no-cache /wheels/* &&\
+    rm -rf /var/lib/apt/lists/*
 
 COPY . $APP_HOME
 

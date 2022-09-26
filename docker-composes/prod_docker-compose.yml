@@ -12,11 +12,10 @@ services:
 #    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../exchange_rates
-      dockerfile: new_Dockerfile.prod
+      dockerfile: Dockerfile.prod
     command: bash -c "
       python manage.py migrate
       && python manage.py collectstatic --noinput
-      && python manage.py initadmin
       && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
       "
     volumes:
