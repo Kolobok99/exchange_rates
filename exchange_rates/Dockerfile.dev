@@ -1,51 +1,3 @@
-#FROM python:3.8
-#
-#ENV PYTHONDONTWRITEBYTECODE 1
-#ENV PYTHONUNBUFFERED 1
-#
-#WORKDIR /app
-#
-#RUN apt-get update && \
-#    pip install --upgrade pip && \
-#    apt-get -y install \
-#    default-libmysqlclient-dev \
-#    python3-dev \
-#    netcat
-#
-#
-#COPY req.txt .
-#
-#ADD . /app/
-#
-#RUN pip install -r req.txt
-
-#FROM python:3.8
-#
-#ENV PYTHONDONTWRITEBYTECODE 1
-#ENV PYTHONUNBUFFERED 1
-#
-#WORKDIR /app
-#
-#RUN apt-get update && \
-#    apt-get -y install \
-#    default-libmysqlclient-dev \
-#    python3-dev \
-#    netcat
-#
-#RUN pip install --upgrade pip
-#
-#COPY dev_req.txt .
-#
-#ADD . /app/
-#
-#RUN pip install -r dev_req.txt
-#
-#
-
-
-
-
-
 FROM python:3.8
 
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -56,12 +8,10 @@ WORKDIR /app
 ADD . /app/
 
 RUN apt-get update && \
-    pip install --upgrade pip && \
     pip install -r req.txt && \
     apt-get -y install \
     default-libmysqlclient-dev \
     python3-dev \
-    netcat
 
 
 
