@@ -18,6 +18,7 @@ build:
 #    - apk add --no-cache docker-compose
 #    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
     - pwd
+    - pwd
     - ls
     - docker-compose -f docker-composes/prod_docker_compose.yml build
     - docker-compose -f docker-composes/prod_docker_compose.yml push
