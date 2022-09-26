@@ -5,12 +5,12 @@ volumes:
 
 services:
   web:
-    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../../exchange_rates
-      dockerfile: ../../exchange_rates/Dockerfile.dev
+      dockerfile: Dockerfile.dev
     command: bash -c "
-      python manage.py migrate
+      ls
+      && python manage.py migrate
       && python manage.py collectstatic --noinput
       && python manage.py initadmin
       && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
@@ -25,10 +25,9 @@ services:
       - db
     restart: always
 
-  test:
-    image: https://gitlab.com/izolotavin99/exchange_rates_project
-    command: python manage.py test
-    restart: "no"
+#  test:
+#    command: python manage.py test
+#    restart: "no"
 
 
   db:

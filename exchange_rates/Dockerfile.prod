@@ -16,7 +16,7 @@ RUN pip install --upgrade pip
 
 COPY . .
 
-COPY prod_req.txt ./req.txt
+COPY req.txt ./req.txt
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels  install -r req.txt
 
 FROM python:3.8
