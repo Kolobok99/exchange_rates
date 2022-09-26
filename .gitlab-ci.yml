@@ -20,7 +20,10 @@ build:
     - pwd
     - pwd
     - ls
+    - systemctl status docker
+    - systemctl start docker
     - docker-compose -f docker-composes/prod_docker-compose.yml build
     - docker-compose -f docker-composes/prod_docker-compose.yml push
+
 
 
