@@ -24,7 +24,7 @@ services:
     expose:
       - 8000
     env_file:
-      - ../exchange_rates/.env_files/.env.prod/.env.dev.settings
+      - ../exchange_rates/.env_files/.env.dev/.env.dev.settings
     depends_on:
       - db
     restart: always
@@ -37,7 +37,7 @@ services:
     ports:
       - '3306:3306'
     env_file:
-      - ../exchange_rates/.env_files/.env.prod/.env.dev.db
+      - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
 
 #  test:
