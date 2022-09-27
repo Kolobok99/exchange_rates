@@ -19,5 +19,5 @@ build:
 test:
   stage: test
   script:
-    - docker-compose -f docker-compose/prod_docker-compose.yml pull
+    - docker-compose -f docker-composes/prod_docker-compose.yml pull
 
