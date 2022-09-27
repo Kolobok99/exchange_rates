@@ -18,7 +18,8 @@ build:
 #    - apk add --no-cache docker-compose
 #    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
     - echo 'CI_BUILD_TOKEN ${CI_BUILD_TOKEN}'
-    - echo '$CI_REGISTRY_IMAGE ${$CI_REGISTRY_IMAGE}'
+    - echo '$CI_REGISTRY_IMAGE ${CI_REGISTRY_IMAGE}'
+    - echo $CI_REGISTRY_IMAGE
     - pwd
     - pwd
     - ls
