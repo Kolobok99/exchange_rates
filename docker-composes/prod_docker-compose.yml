@@ -40,10 +40,10 @@ services:
       - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
 
-#  test:
-##    image: https://gitlab.com/izolotavin99/exchange_rates_project
-#    command: python manage.py test
-#    restart: "no"
+  test:
+#    image: https://gitlab.com/izolotavin99/exchange_rates_project
+    command: python manage.py test
+    restart: "no"
 
 
   nginx:
