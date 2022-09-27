@@ -20,10 +20,4 @@ up:
   stage: test
   script:
     - docker-compose -f docker-composes/prod_docker-compose.yml pull
-    - docker-compose -f docker-composes/prod_docker-compose.yml up
-
-
-testing:
-  stage: test
-  script:
-     - docker-compose -f docker-composes/prod_docker-compose.yml exec web bash -c "python manage.py test"
+    - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web bash -c "python manage.py test"
