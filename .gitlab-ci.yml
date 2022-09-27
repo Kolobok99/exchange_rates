@@ -20,7 +20,7 @@ build:
     - echo CI_REGISTRY_USER $CI_REGISTRY_USER
     - echo $CI_REGISTRY_PASSWORD $CI_REGISTRY_PASSWORD
     - echo CI_REGISTRY $CI_REGISTRY
-    - echo CI_JOB_TOKEN $CI_JOB_TOKEN
+#    - echo CI_JOB_TOKEN $CI_JOB_TOKEN
 #
 #    - sudo usermod -aG docker gitlab-runner
 #    - sudo service docker restart
