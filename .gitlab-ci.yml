@@ -25,7 +25,6 @@ build:
 #    - sudo usermod -aG docker gitlab-runner
 #    - sudo service docker restart
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - systemctl start docker
     - docker-compose -f docker-composes/prod_docker-compose.yml build
     - docker-compose -f docker-composes/prod_docker-compose.yml push
 
