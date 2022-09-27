@@ -47,7 +47,8 @@ services:
 #    image: https://gitlab.com/izolotavin99/exchange_rates_project
     command: python manage.py test
     restart: "no"
-
+    depends_on:
+      - db
 
   nginx:
     build: ../nginx_files/nginx.prod
