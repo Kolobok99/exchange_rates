@@ -31,7 +31,7 @@ services:
 
 
   db:
-    image: mysql:5.7
+    image: mysql:latest
     volumes:
       - prod_mysql_data:/var/lib/mysql
     ports:
@@ -39,9 +39,7 @@ services:
     env_file:
       - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
-    command:
-      - --default-authentication-plugin=mysql_native_password
-#    entrypoint: bash -c "mysql -u root -p12345 -e "GRANT ALL PRIVILEGES ON test_db.* TO 'manager'@'%';""
+
 
 
 #  test:
