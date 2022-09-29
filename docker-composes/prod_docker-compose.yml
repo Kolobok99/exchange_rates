@@ -39,16 +39,20 @@ services:
     env_file:
       - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
+#    command: bash -c "
+#      mysql -u root -p12345
+#      && GRANT ALL PRIVILEGES ON test_db.* TO 'manager'@'%';"
 
-  test:
-    build:
-      context: ../exchange_rates
-      dockerfile: Dockerfile.prod
-#    image: https://gitlab.com/izolotavin99/exchange_rates_project
-    command: python manage.py test
-    restart: "no"
-    depends_on:
-      - db
+#  test:
+#    build:
+#      context: ../exchange_rates
+#      dockerfile: Dockerfile.prod
+#    command: python manage.py test
+#    restart: "no"
+#    env_file:
+#      - ../exchange_rates/.env_files/.env.dev/.env.dev.settings
+#    depends_on:
+#      - db
 
   nginx:
     build: ../nginx_files/nginx.prod

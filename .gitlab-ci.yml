@@ -6,20 +6,22 @@ stages:
   - test
   - deploy
 
-before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
   stage: build
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker-compose -f docker-composes/prod_docker-compose.yml build
     - docker-compose -f docker-composes/prod_docker-compose.yml push
 
 test:
   stage: test
-  script:
+  before_script:
     - docker-compose -f docker-composes/prod_docker-compose.yml pull
     - docker-compose -f docker-composes/prod_docker-compose.yml up -d
+    - docker-compose -f docker-composes/prod_docker-compose.yml exec db bash
+    - mysql -u root -p12345
+    - GRANT ALL PRIVILEGES ON test_db.* TO 'manager'@'%';
+  script:
     - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web python manage.py test
-    - docker-compose -f docker-composes/prod_docker-compose.yml stop
-    - docker-compose -f docker-composes/prod_docker-compose.yml down -v
