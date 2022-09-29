@@ -20,8 +20,9 @@ test:
   before_script:
     - docker-compose -f docker-composes/prod_docker-compose.yml pull
     - docker-compose -f docker-composes/prod_docker-compose.yml up -d
-    - docker-compose -f docker-composes/prod_docker-compose.yml exec db bash
+    - docker-compose -f docker-composes/prod_docker-compose.yml exec -t db bash
     - mysql -u root -p12345
     - GRANT ALL PRIVILEGES ON test_db.* TO 'manager'@'%';
+    - exit
   script:
     - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web python manage.py test
