@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     restart: always
-
+    entrypoint: ./scripts/wait_db.sh
 
   db:
     image: mysql:latest
@@ -39,8 +39,6 @@ services:
     env_file:
       - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
-
-
 
 
 #  test:

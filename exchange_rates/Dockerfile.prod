@@ -40,13 +40,14 @@ COPY --from=builder /app/wheels /wheels
 COPY --from=builder /app/req.txt .
 
 RUN apt-get update && \
+    apt-get install -y netcat && \
     pip install --no-cache /wheels/* &&\
     rm -rf /var/lib/apt/lists/*
 
 COPY . $APP_HOME
 
 RUN chown -R app:app $APP_HOME
-
+RUN chmod +x $APP_HOME/scripts/wait_db.sh
 USER app
 
 
