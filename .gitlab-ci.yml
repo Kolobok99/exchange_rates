@@ -6,18 +6,20 @@ stages:
   - test
   - deploy
 
+before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
   stage: build
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker-compose -f docker-composes/prod_docker-compose.yml build
     - docker-compose -f docker-composes/prod_docker-compose.yml push
 
-
-up:
+test:
   stage: test
   script:
     - docker-compose -f docker-composes/prod_docker-compose.yml pull
-    - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web bash -c "python manage.py test"
+    - docker-compose -f docker-composes/prod_docker-compose.yml up -d
+    - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web python manage.py test
+    - docker-compose -f docker-composes/prod_docker-compose.yml stop
+    - docker-compose -f docker-composes/prod_docker-compose.yml down -v

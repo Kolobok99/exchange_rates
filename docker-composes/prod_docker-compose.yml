@@ -40,15 +40,15 @@ services:
       - ../exchange_rates/.env_files/.env.dev/.env.dev.db
     restart: always
 
-#  test:
-#    build:
-#      context: ../exchange_rates
-#      dockerfile: Dockerfile.prod
-##    image: https://gitlab.com/izolotavin99/exchange_rates_project
-#    command: python manage.py test
-#    restart: "no"
-#    depends_on:
-#      - db
+  test:
+    build:
+      context: ../exchange_rates
+      dockerfile: Dockerfile.prod
+#    image: https://gitlab.com/izolotavin99/exchange_rates_project
+    command: python manage.py test
+    restart: "no"
+    depends_on:
+      - db
 
   nginx:
     build: ../nginx_files/nginx.prod
