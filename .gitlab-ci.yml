@@ -6,6 +6,12 @@ stages:
   - test
   - deploy
 
+variables:
+  MYSQL_DATABASE: "db"
+  MYSQL_ROOT_PASSWORD: "12345"
+  MYSQL_USER: "root"
+  MYSQL_HOST: "mysql"
+
 
 build:
   stage: build
