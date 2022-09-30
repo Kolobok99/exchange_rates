@@ -2,23 +2,30 @@ image: docker-compose:latest
 services:
   - docker:dind
 stages:
-  - build
-  - test
-  - deploy
+  - dev_deploy
+  - dev_test
+  - dev_destroy
+  - prod_build
+  - prod_deploy
 
 
-build:
-  stage: build
+dev_deploy:
+  stage: dev_deploy
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml push
 
-test:
-  stage: test
+dev_test:
+  stage: dev_test
   before_script:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml up -d
   script:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml run --rm web python manage.py test
+
+dev_destroy:
+  stage: dev_destroy
+  script:
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml down -v
