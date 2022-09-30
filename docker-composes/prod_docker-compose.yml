@@ -11,7 +11,7 @@ services:
   web:
 #    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
-      context: ../exchange_rates
+      context: ../backend
       dockerfile: Dockerfile.prod
     command: bash -c "
       python manage.py migrate
@@ -24,7 +24,7 @@ services:
     expose:
       - 8000
     env_file:
-      - ../exchange_rates/.env_files/.env.dev/.env.dev.settings
+      - ../backend/.env_files/.env.dev/.env.dev.settings
     depends_on:
       - db
     restart: always
@@ -37,18 +37,18 @@ services:
     ports:
       - '3306:3306'
     env_file:
-      - ../exchange_rates/.env_files/.env.dev/.env.dev.db
+      - ../backend/.env_files/.env.dev/.env.dev.db
     restart: always
 
 
 #  test:
 #    build:
-#      context: ../exchange_rates
+#      context: ../backend
 #      dockerfile: Dockerfile.prod
 #    command: python manage.py test
 #    restart: "no"
 #    env_file:
-#      - ../exchange_rates/.env_files/.env.dev/.env.dev.settings
+#      - ../backend/.env_files/.env.dev/.env.dev.settings
 #    depends_on:
 #      - db
 

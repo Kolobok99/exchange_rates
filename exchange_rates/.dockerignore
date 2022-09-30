@@ -1,7 +1,0 @@
-Dockerfile.dev
-Dockerfile.prod
-dev_req.txt
-db.sqlite3
-
-**/logs
-
