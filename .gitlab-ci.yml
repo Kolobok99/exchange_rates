@@ -17,17 +17,17 @@ dev_deploy:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - $D_C_DEV build
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml push
+    - $D_C_DEV push
 
 dev_test:
   stage: dev_test
   before_script:
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml up -d
+    - $D_C_DEV pull
+    - $D_C_DEV up -d
   script:
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml run --rm web python manage.py test
+    - $D_C_DEV run --rm web python manage.py test
 
 dev_destroy:
   stage: dev_destroy
   script:
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml down -v
+    - $D_C_DEV down -v
