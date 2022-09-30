@@ -8,7 +8,7 @@ then
       sleep 0.1
     done
 
-    echo "mysql started"
+    echo "mysql started!"
 fi
 
 python manage.py flush --no-input
