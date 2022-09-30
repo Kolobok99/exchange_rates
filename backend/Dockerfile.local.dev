@@ -1,0 +1,18 @@
+FROM python:3.8
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY req.txt .
+
+RUN apt-get update && \
+    pip install -r req.txt && \
+    apt-get -y install \
+    default-libmysqlclient-dev \
+    python3-dev \
+    netcat
+
+WORKDIR /app
+
+ADD . /app/
+

@@ -6,25 +6,19 @@ stages:
   - test
   - deploy
 
-#variables:
-#  MYSQL_DATABASE: "db"
-#  MYSQL_ROOT_PASSWORD: "12345"
-#  MYSQL_USER: "root"
-#  MYSQL_HOST:  $HOSTNAME
-
 
 build:
   stage: build
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker-compose -f docker-composes/prod_docker-compose.yml build
-    - docker-compose -f docker-composes/prod_docker-compose.yml push
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml push
 
 test:
   stage: test
   before_script:
-    - docker-compose -f docker-composes/prod_docker-compose.yml pull
-    - docker-compose -f docker-composes/prod_docker-compose.yml up -d
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml up -d
   script:
-    - docker-compose -f docker-composes/prod_docker-compose.yml run --rm web python manage.py test
+    - docker-compose -f docker-composes/dev_ci_docker-compose.yml run --rm web python manage.py test

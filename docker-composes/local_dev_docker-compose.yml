@@ -23,12 +23,7 @@ services:
     depends_on:
       - db
     restart: always
-
-
-#  test:
-#    command: python manage.py test
-#    restart: "no"
-
+    entrypoint: ./scripts/wait_db.sh
 
   db:
     image: mysql:latest

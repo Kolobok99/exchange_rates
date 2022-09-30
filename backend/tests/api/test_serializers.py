@@ -29,7 +29,7 @@ class CurrencySerializerTestCase(TestCase):
     def test_name_field_content(self):
         """Тест: сериализатор содежрит ожидаемое значение для 'name'"""
         data = self.serializer.data
-        self.assertEqual(data['name1'], self.currency_attributes['name'])
+        self.assertEqual(data['name'], self.currency_attributes['name'])
 
     def test_rate_field_content(self):
         """Тест: сериализатор содежрит ожидаемое значение для 'rate'"""
