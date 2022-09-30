@@ -8,13 +8,15 @@ stages:
   - prod_build
   - prod_deploy
 
+variables:
+  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
 
 dev_deploy:
   stage: dev_deploy
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
+    - $D_C_DEV build
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml push
 
 dev_test:
