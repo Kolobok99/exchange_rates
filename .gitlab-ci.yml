@@ -23,7 +23,7 @@ dev_build:
 
   tags:
     - docker
-    -
+
 
 dev_test:
   stage: dev_test
