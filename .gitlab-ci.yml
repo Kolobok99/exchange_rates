@@ -14,7 +14,17 @@ variables:
 
 dev_build:
   stage: dev_build
-#  before_script:
+  before_script:
+    - cd ..
+    - ls
+    - cd ..
+    - ls
+    - cd ..
+    - ls
+    - cd ..
+    - ls
+    - cd ..
+    - ls
 #    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - $D_C_DEV build
