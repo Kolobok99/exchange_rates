@@ -1,6 +1,7 @@
 image: docker-compose:latest
 services:
   - docker:dind
+
 stages:
   - dev_build
   - dev_test
@@ -20,6 +21,9 @@ dev_build:
     - $D_C_DEV build
     - $D_C_DEV push
 
+  tags:
+    - docker
+
 dev_test:
   stage: dev_test
   before_script:
@@ -28,6 +32,8 @@ dev_test:
   script:
     - $D_C_DEV run --rm web python manage.py test
 
+  tags:
+    - docker
 #dev_destroy:
 #  stage: dev_destroy
 #  script:
