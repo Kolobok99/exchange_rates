@@ -14,27 +14,7 @@ variables:
 
 dev_build:
   stage: dev_build
-  before_script:
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
+#  before_script:
 #    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - $D_C_DEV build
@@ -48,7 +28,7 @@ dev_test:
   script:
     - $D_C_DEV run --rm web python manage.py test
 
-dev_destroy:
-  stage: dev_destroy
-  script:
-    - $D_C_DEV down -v
+#dev_destroy:
+#  stage: dev_destroy
+#  script:
+#    - $D_C_DEV down -v
