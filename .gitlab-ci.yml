@@ -2,7 +2,7 @@ image: docker-compose:latest
 services:
   - docker:dind
 stages:
-  - dev
+  - dev_build
   - dev_test
   - dev_destroy
   - prod_build
