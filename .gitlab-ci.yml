@@ -3,21 +3,25 @@ services:
   - docker:dind
 stages:
   - dev
-  - prod
+  - dev_test
+  - dev_destroy
+  - prod_build
+  - prod_deploy
 
 variables:
   D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
+  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
 
 dev_build:
-  stage: dev
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  stage: dev_build
+#  before_script:
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - $D_C_DEV build
     - $D_C_DEV push
 
 dev_test:
-  stage: dev
+  stage: dev_test
   before_script:
     - $D_C_DEV pull
     - $D_C_DEV up -d
@@ -25,6 +29,6 @@ dev_test:
     - $D_C_DEV run --rm web python manage.py test
 
 dev_destroy:
-  stage: dev
+  stage: dev_destroy
   script:
     - $D_C_DEV down -v
