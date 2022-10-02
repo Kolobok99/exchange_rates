@@ -54,7 +54,8 @@
 ##  script:
 ##    - echo "1"
 
-image: docker/compose:stable
+image:
+  name: docker/compose:latest
 
 stages:
   - build
