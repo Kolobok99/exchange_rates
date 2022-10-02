@@ -9,6 +9,7 @@ stages:
   - prod_build
   - prod_deploy
 
+
 variables:
   D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
   D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
