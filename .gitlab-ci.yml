@@ -54,8 +54,9 @@
 ##  script:
 ##    - echo "1"
 
-image:
-  name: docker/compose:latest
+image: docker
+services:
+  - docker:dind
 
 stages:
   - build
@@ -63,4 +64,5 @@ stages:
 build:
   stage: build
   script:
+    - apk add --no-cache docker-compose
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
