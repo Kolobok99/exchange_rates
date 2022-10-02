@@ -14,7 +14,7 @@ variables:
   D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
   D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
 
-  DOCKER_HOST: tcp://thedockerhost:2375/
+  DOCKER_HOST: tcp://localhost:2375/
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
