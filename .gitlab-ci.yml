@@ -55,24 +55,24 @@
 ##    - echo "1"
 
 
-image: docker:latest
-
-services:
-  - docker:dind
 
 #variables:
 #  DOCKER_HOST: tcp://localhost:2375/
 #  DOCKER_DRIVER: overlay2
 #  DOCKER_TLS_CERTDIR: "/certs"
 
-
+stages:
+  - build
 
 build:
+  image: docker:stable
+  services:
+    - docker:dind
   stage: build
   script:
     - echo $CI_REGISTRY
     - ls
     - pwd
     - apk add ca-certificates
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN}  $CI_REGISTRY
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
