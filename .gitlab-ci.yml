@@ -54,7 +54,9 @@
 ##  script:
 ##    - echo "1"
 
-
+image: docker:stable
+services:
+  - docker:dind
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
@@ -65,9 +67,6 @@ stages:
   - build
 
 build:
-  image: docker:stable
-  services:
-    - docker:dind
   stage: build
   script:
     - echo $CI_REGISTRY
