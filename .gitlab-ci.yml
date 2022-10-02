@@ -1,3 +1,42 @@
+#image: docker:latest
+#
+#services:
+#  - docker:dind
+#
+#stages:
+#  - dev_build
+#  - dev_test
+#  - prod_build
+#  - prod_deploy
+#
+#variables:
+#  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
+#  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
+#
+#before_script:
+#  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#
+#dev_build:
+#  stage: dev_build
+#  image: docker/compose:latest
+#  script:
+#    - $D_C_DEV build
+#    - $D_C_DEV push
+#
+#  tags:
+#    - docker
+#
+#dev_test:
+#  stage: dev_test
+#  before_script:
+#    - $D_C_DEV pull
+#    - $D_C_DEV up -d
+#  script:
+#    - $D_C_DEV run --rm web python manage.py test
+#
+#  tags:
+#    - docker
+
 image: docker:latest
 
 services:
@@ -5,48 +44,10 @@ services:
 
 stages:
   - dev_build
-  - dev_test
-  - prod_build
-  - prod_deploy
 
-variables:
-  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
-  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
-
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
-dev_build:
+first:
   stage: dev_build
-  image: docker/compose:latest
-  script:
-    - $D_C_DEV build
-    - $D_C_DEV push
-
-  tags:
-    - docker
-
-dev_test:
-  stage: dev_test
   before_script:
-    - $D_C_DEV pull
-    - $D_C_DEV up -d
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - $D_C_DEV run --rm web python manage.py test
-
-  tags:
-    - docker
-
-#stages:
-#  - test
-#
-#test:
-#  stage: test
-#  image: python:latest
-#  before_script:
-#    - cd backend
-#  script:
-#  - pip install -r req.txt
-#  - python manage.py test
-#  tags:
-#    - local
+    - echo "1"
