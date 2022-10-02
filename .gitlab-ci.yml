@@ -17,7 +17,7 @@
 #  DOCKER_HOST: tcp://localhost:2375/
 #  DOCKER_DRIVER: overlay2
 #  DOCKER_TLS_CERTDIR: "/certs"
-#
+
 #
 #before_script:
 #  - apk add ca-certificates
@@ -59,6 +59,13 @@ image: docker:latest
 
 services:
   - docker:dind
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+
 
 build:
   stage: build
