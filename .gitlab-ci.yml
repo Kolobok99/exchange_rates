@@ -46,6 +46,8 @@ stages:
 test:
   stage: test
   image: python:latest
+  before_script:
+    - cd backend
   script:
   - pip install -r req.txt
   - python manage.py test
