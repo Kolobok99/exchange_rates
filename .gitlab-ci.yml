@@ -1,55 +1,66 @@
-image: docker:19.03.1
+#image: docker:19.03.1
+#
+#services:
+#  - docker:19.03.1-dind
+#
+#stages:
+#  - dev_build
+#  - dev_test
+#  - prod_build
+#  - prod_deploy
+#
+#
+#variables:
+#  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
+#  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
+#
+#  DOCKER_HOST: tcp://localhost:2375/
+#  DOCKER_DRIVER: overlay2
+#  DOCKER_TLS_CERTDIR: "/certs"
+#
+#
+#before_script:
+#  - apk add ca-certificates
+#  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+##  - docker-compose build -f $CI_REGISTRY/docker-composes/prod_cd_docker-compose.yml
+#
+#dev_build:
+#  stage: dev_build
+#  image: docker/compose:latest
+#  script:
+#    - $D_C_DEV build
+#    - $D_C_DEV push
+#
+#  tags:
+#    - docker
+#
+#dev_test:
+#  stage: dev_test
+#  before_script:
+#    - $D_C_DEV pull
+#    - $D_C_DEV up -d
+#  script:
+#    - $D_C_DEV run --rm web python manage.py test
+#
+#  tags:
+#    - docker
+#
+#
+##docker-build:
+##  image: docker:stable
+##  stage: build
+##  before_script:
+##    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+##  script:
+##    - echo "1"
+
+
+image: docker:latest
 
 services:
-  - docker:19.03.1-dind
+  - docker:dind
 
-stages:
-  - dev_build
-  - dev_test
-  - prod_build
-  - prod_deploy
-
-
-variables:
-  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
-  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
-
-  DOCKER_HOST: tcp://localhost:2375/
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
-
-
-before_script:
-  - apk add ca-certificates
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#  - docker-compose build -f $CI_REGISTRY/docker-composes/prod_cd_docker-compose.yml
-
-dev_build:
-  stage: dev_build
-  image: docker/compose:latest
+build:
+  stage: build
   script:
-    - $D_C_DEV build
-    - $D_C_DEV push
-
-  tags:
-    - docker
-
-dev_test:
-  stage: dev_test
-  before_script:
-    - $D_C_DEV pull
-    - $D_C_DEV up -d
-  script:
-    - $D_C_DEV run --rm web python manage.py test
-
-  tags:
-    - docker
-
-
-#docker-build:
-#  image: docker:stable
-#  stage: build
-#  before_script:
-#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#  script:
-#    - echo "1"
+    docker-compose -f docker-composes/dev_ci_docker-compose.yml build
