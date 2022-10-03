@@ -13,6 +13,7 @@ before_script:
   - apk add docker-compose
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
+
 build:
   stage: build
   script:
