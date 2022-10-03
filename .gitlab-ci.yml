@@ -8,7 +8,7 @@ stages:
 test:
   stage: test
   script:
-    - echo ${Heroku_api_key}
+    - echo $Heroku_api_key
 
 
 
