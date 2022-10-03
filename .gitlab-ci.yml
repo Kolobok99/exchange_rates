@@ -17,39 +17,32 @@ stages:
   - build
   - deploy
 
-#test:
-#  stage: test
-#  before_script:
-#    - ${D_C_DEV} up -d --build
-#  script:
-#    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
-#  tags:
-#    - docker
-#
-
-build:
-  stage: build
+test:
+  stage: test
   before_script:
-    - apk add --no-cache bash
-    - chmod +x ./backend/scripts/setup_prod_env.sh
-#    - pwd
-#    - mkdir ./backend/.env_files/.env.prod/
-#    - cd ./backend/.env_files/.env.prod/
-    - pwd
-    - bash ./backend/scripts/setup_prod_env.sh
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - ${D_C_DEV} up -d --build
   script:
-    - ${D_C_PROD} build
-    - ${D_C_PROD} up
+    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
+  tags:
+    - docker
 
 
-    #dev_test:
-#  stage: dev_test
+#build:
+#  stage: build
 #  before_script:
-#    - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull registry.gitlab.com/izolotavin99/exchange_rates_project
-#    - ${D_C_DEV} up
+#    - apk add --no-cache bash
+#    - chmod +x ./backend/scripts/setup_prod_env.sh
+##    - pwd
+##    - mkdir ./backend/.env_files/.env.prod/
+##    - cd ./backend/.env_files/.env.prod/
+#    - pwd
+#    - bash ./backend/scripts/setup_prod_env.sh
+#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 #  script:
-#    - ${D_C_DEV} run --rm web python manage.py test
+#    - ${D_C_PROD} build
+#    - ${D_C_PROD} up
+
+
 
 
 
