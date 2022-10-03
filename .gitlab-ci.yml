@@ -5,9 +5,9 @@ services:
 stages:
   - build
 
-#variables:
-#  DOCKER_HOST: tcp://docker:2375
-#  DOCKER_DRIVER: overlay2
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
 
 before_script:
   - apk add docker-compose
@@ -17,9 +17,32 @@ build:
   stage: build
   script:
      - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
-#    - docker push registry.gitlab.com/your_username/your_project_name
   tags:
   - docker
+
+
+# -------------------------------------------------------
+
+# ERROR: Couldn't connect to Docker daemon at http://docker:2375 - is it running?
+
+#image: docker:stable
+#services:
+#  - docker:dind
+#
+#stages:
+#  - build
+#
+#
+#before_script:
+#  - apk add docker-compose
+#  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+#
+#build:
+#  stage: build
+#  script:
+#     - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
+#  tags:
+#  - docker
 
 #--------------------------------------------------------
 
