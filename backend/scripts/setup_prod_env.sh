@@ -1,6 +1,7 @@
 #!/bin/sh
 
-mkdir ./backend/.env_files/.env.prod cd "$_"
+mkdir ./backend/.env_files/.env.prod
+cd /backend/.env.files/.env.prod
 
 pwd
 echo DEBUG=0 >> .env.prod.settings
