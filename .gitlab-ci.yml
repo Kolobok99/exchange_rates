@@ -1,16 +1,44 @@
-image: docker/compose:stable
-
+image: docker:stable
 services:
-  - docker:stable
+  - docker:dind
 
 stages:
   - build
+
+#variables:
+#  DOCKER_HOST: tcp://docker:2375
+#  DOCKER_DRIVER: overlay2
+
+before_script:
+  - apk add --update py-pip &&
+      pip install docker-compose
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
 build:
   stage: build
   script:
-    - docker-compose -f dev_ci_docker-compose.yml images
+     - docker-compose -f dev_ci_docker-compose.yml images
+#    - docker push registry.gitlab.com/your_username/your_project_name
   tags:
-    - docker
+  - docker
+
+#--------------------------------------------------------
+
+# Error Job failed: failed to pull image "docker/compose:stable
+
+#image: docker/compose:stable
+#
+#services:
+#  - docker:stable
+#
+#stages:
+#  - build
+#build:
+#  stage: build
+#  script:
+#    - docker-compose -f dev_ci_docker-compose.yml images
+#  tags:
+#    - docker
 
 
 
