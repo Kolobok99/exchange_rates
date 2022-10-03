@@ -9,7 +9,7 @@ volumes:
 
 services:
   web:
-#    image: https://gitlab.com/izolotavin99/exchange_rates_project
+#    image: registry.gitlab.com/izolotavin99/exchange_rates_project:latest
     build:
       context: ../backend
       dockerfile: Dockerfile.ci.dev
