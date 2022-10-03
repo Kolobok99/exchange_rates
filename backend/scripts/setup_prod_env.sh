@@ -1,9 +1,7 @@
 #!/bin/sh
-mkdir /builds/izolotavin99/exchange_rates_project/backend/.env_files/.env.prod/
-ls
+mkdir ./backend/.env_files/.env.prod/
 # shellcheck disable=SC2164
-cd /builds/izolotavin99/exchange_rates_project/backend/.env.files/.env.prod/
-
+cd ./backend/.env_files/.env.prod/
 pwd
 echo DEBUG=0 >> .env.prod.settings
 echo SECRET_KEY=$SECRET_KEY >> .env.prod.settings
