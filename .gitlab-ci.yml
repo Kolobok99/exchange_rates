@@ -13,8 +13,7 @@ stages:
 test:
   stage: test
   before_script:
-    - ${D_C_DEV} build
-    - ${D_C_DEV} up -d
+    - ${D_C_DEV} up -d --build
   script:
     - ${D_C_DEV} run --rm web python manage.py test
   tags:
