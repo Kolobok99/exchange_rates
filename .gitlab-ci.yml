@@ -18,18 +18,18 @@ dev_build:
   stage: dev_build
   script:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml build
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml push registry.gitlab.com/izolotavin99/exchange_rates_project
+    - docker push -a registry.gitlab.com/izolotavin99/exchange_rates_project
   tags:
     - docker
 
 
-dev_test:
-  stage: dev_test
-  before_script:
-    - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull registry.gitlab.com/izolotavin99/exchange_rates_project
-    - ${D_C_DEV} up
-  script:
-    - ${D_C_DEV} run --rm web python manage.py test
+#dev_test:
+#  stage: dev_test
+#  before_script:
+#    - docker-compose -f docker-composes/dev_ci_docker-compose.yml pull registry.gitlab.com/izolotavin99/exchange_rates_project
+#    - ${D_C_DEV} up
+#  script:
+#    - ${D_C_DEV} run --rm web python manage.py test
 
 
 
