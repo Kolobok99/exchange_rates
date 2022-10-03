@@ -1,7 +1,7 @@
 #!/bin/sh
-pwd
-mkdir ./backend/.env_files/.env.prod
-cd /backend/.env.files/.env.prod
+mkdir /builds/izolotavin99/exchange_rates_project/backend/.env_files/.env.prod
+ls
+cd /builds/izolotavin99/exchange_rates_project/backend/.env.files/.env.prod
 
 pwd
 echo DEBUG=0 >> .env.prod.settings
