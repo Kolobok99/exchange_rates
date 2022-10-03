@@ -5,10 +5,11 @@ services:
 stages:
   - build
 
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
 build:
   stage: build
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
   tags:
