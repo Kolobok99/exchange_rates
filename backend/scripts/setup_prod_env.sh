@@ -2,6 +2,7 @@
 
 mkdir ./backend/.env_files/.env.prod cd "$_"
 
+pwd
 echo DEBUG=0 >> .env.prod.settings
 echo SECRET_KEY=$SECRET_KEY >> .env.prod.settings
 echo DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1] >> .env.prod.settings
