@@ -5,3 +5,4 @@ backend/logs
 /backend/dev_req.txt
 /backend/static/
 /backend/.env_files/.env.prod/
+/ci/ci_02.10.yml
