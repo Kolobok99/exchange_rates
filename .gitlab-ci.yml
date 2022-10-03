@@ -15,7 +15,7 @@ test:
   before_script:
     - ${D_C_DEV} up -d --build
   script:
-    - ${D_C_DEV} run --rm web python manage.py test
+    - ${D_C_DEV} exec web bash -c "python manage.py test"
   tags:
     - docker
 
