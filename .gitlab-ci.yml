@@ -11,6 +11,7 @@ variables:
 
 before_script:
   - apk add docker-compose
+  - groupadd docker
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
 
@@ -20,6 +21,7 @@ build:
      - sudo docker-compose -f docker-composes/dev_ci_docker-compose.yml images
   tags:
   - docker
+
 
 
 # -------------------------------------------------------
