@@ -16,7 +16,7 @@ before_script:
 build:
   stage: build
   script:
-     - docker-compose -f dev_ci_docker-compose.yml images
+     - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
 #    - docker push registry.gitlab.com/your_username/your_project_name
   tags:
   - docker
