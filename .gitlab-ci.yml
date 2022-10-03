@@ -17,7 +17,7 @@ before_script:
 dev_build:
   stage: dev_build
   script:
-    - docker-compose build -f registry.gitlab.com/izolotavin99/exchange_rates_project/docker-composes/dev_ci_docker-compose.yml
+    - docker-compose -f registry.gitlab.com/izolotavin99/exchange_rates_project/docker-composes/dev_ci_docker-compose.yml build
     - docker-compose push registry.gitlab.com/izolotavin99/exchange_rates_project/docker-composes
   tags:
     - docker
@@ -30,7 +30,17 @@ dev_test:
     - ${D_C_DEV} up
   script:
     - ${D_C_DEV} run --rm web python manage.py test
-    # -------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+# -------------------------------------------------------
     #############
     # IT"S WORK!#
     #############
