@@ -1,5 +1,5 @@
 #!/bin/sh
-
+pwd
 mkdir ./backend/.env_files/.env.prod
 cd /backend/.env.files/.env.prod
 
