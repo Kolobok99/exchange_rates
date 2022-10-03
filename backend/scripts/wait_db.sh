@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$SQL_DATABASE" = "mysql" ]
+if [ "$SQL_NAME" = "mysql" ]
 then
     echo "Waiting for mysql..."
 

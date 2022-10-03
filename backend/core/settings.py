@@ -73,9 +73,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.mysql'),
-        'NAME': os.environ.get('SQL_DATABASE', default='db'),
+        'NAME': os.environ.get('SQL_NAME', default='db'),
         'USER': os.environ.get('SQL_USER', default='root'),
-        'PASSWORD': os.environ.get('QL_ROOT_PASSWORD', default='12345'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', default='12345'),
         'HOST': os.environ.get('SQL_HOST', default='db'),
         'PORT': os.environ.get('SQL_PORT', default='3306'),
     }
