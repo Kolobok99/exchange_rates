@@ -1,15 +1,38 @@
-image: docker:stable
+image: docker/compose:stable
 
 services:
   - docker:stable
 
 stages:
   - build
-
 build:
   stage: build
   script:
     - docker-compose -f dev_ci_docker-compose.yml images
   tags:
     - docker
+
+
+
+#------------------------------------------------------------
+
+# ERROR: docker-compose: not found
+
+#image: docker:stable
+#
+#services:
+#  - docker:stable
+#
+#stages:
+#  - build
+#
+#build:
+#  stage: build
+#  script:
+#    - docker-compose -f dev_ci_docker-compose.yml images
+#  tags:
+#    - docker
+
+#-------------------------------------------------------------
+
 
