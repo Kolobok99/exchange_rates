@@ -1,4 +1,7 @@
-docker-build:
+stages:
+  - build
+
+build:
   image: docker:latest
   stage: build
   services:
@@ -9,6 +12,24 @@ docker-build:
     - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
   tags:
     - docker
+
+
+# -------------------------------------------------------
+    #############
+    # IT"S WORK!#
+    #############
+
+#docker-build:
+#  image: docker:latest
+#  stage: build
+#  services:
+#    - docker:dind
+#  before_script:
+#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#  script:
+#    - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
+#  tags:
+#    - docker
 
 # -------------------------------------------------------
 
