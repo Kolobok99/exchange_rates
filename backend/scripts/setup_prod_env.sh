@@ -19,6 +19,7 @@ echo MYSQL_PORT=$SQL_PORT >> .env.prod.db
 echo MYSQL_PASSWORD=$SQL_PASSWORD >> .env.prod.db
 echo MYSQL_ROOT_PASSWORD=$SQL_ROOT_PASSWORD >> .env.prod.db
 
+echo "ДОБАВИЛ!!!"
 
 cd ../../..
 
