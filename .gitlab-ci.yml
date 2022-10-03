@@ -16,7 +16,7 @@ before_script:
 build:
   stage: build
   script:
-     - docker-compose -f docker-composes/dev_ci_docker-compose.yml images
+     - sudo docker-compose -f docker-composes/dev_ci_docker-compose.yml images
   tags:
   - docker
 
