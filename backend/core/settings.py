@@ -69,6 +69,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.mysql'),
