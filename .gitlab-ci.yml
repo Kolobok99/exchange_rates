@@ -2,31 +2,55 @@ image: docker:latest
 services:
   - docker:dind
 
-variables:
-  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
-
 stages:
   - test
-  - build
-  - deploy
 
 test:
   stage: test
-  before_script:
-    - ${D_C_DEV} up -d --build
-  script:
-    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
-  tags:
-    - docker
+  script: echo ${Heroku_api_key}
 
 
 
-#build:
-#  stage: build
+
+
+
+
+
+  # -----------------------------------------
+
+  ##########################
+  # WORK WITH TEST version #
+  ##########################
+
+#image: docker:latest
+#services:
+#  - docker:dind
+#
+#variables:
+#  D_C_DEV: docker-compose -f docker-composes/dev_ci_docker-compose.yml
+#  D_C_PROD: docker-compose -f docker-composes/prod_cd_docker-compose.yml
+#
+#stages:
+#  - test
+#  - build
+#  - deploy
+#
+#test:
+#  stage: test
 #  before_script:
-#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#    - ${D_C_DEV} up -d --build
 #  script:
-#    -
+#    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
+#  tags:
+#    - docker
+
+
+build:
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    -
 
 
     #dev_test:
