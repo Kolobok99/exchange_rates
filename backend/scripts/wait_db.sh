@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$SQL_NAME" = "mysql" ]
+if [ "$SQL_DATABASE" = "mysql" ]
 then
     echo "Waiting for mysql..."
 
@@ -10,5 +10,6 @@ then
 
     echo "mysql started!"
 fi
+
 
 exec "$@"
