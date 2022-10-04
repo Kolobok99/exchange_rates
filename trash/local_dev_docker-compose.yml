@@ -7,7 +7,7 @@ services:
   web:
     build:
       context: ../backend
-      dockerfile: ../backend/Dockerfile.local.dev
+      dockerfile: Dockerfile.local.dev
     command: bash -c "
       python manage.py migrate
       && python manage.py collectstatic --noinput

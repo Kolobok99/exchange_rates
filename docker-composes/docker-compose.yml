@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build: ../backend
+    command: bash -c "
+      python manage.py flush --no-input
+      && python manage.py migrate
+      && python manage.py collectstatic --no-input --clear
+      && python manage.py initadmin
+      && python manage.py runserver 0.0.0.0:8000
+      "
+    volumes:
+      - ../backend/:/app/
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=very_secret_key
+      - SQL_ENGINE=django.db.backends.mysql
+      - SQL_NAME=dev_db
+      - SQL_USER=manager
+      - SQL_PASSWORD=password
+      - SQL_HOST=db
+      - SQL_PORT=3306
+      - DATABASE=mysql
+    depends_on:
+      - db
+    entrypoint: ./scripts/wait_db.sh
+
+  db:
+    image: mysql:latest
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_USER=manager
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=dev_db
+volumes:
+  mysql_data:

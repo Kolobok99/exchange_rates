@@ -1,8 +1,6 @@
 #!/bin/sh
 
-
 mkdir ./backend/.env_files/.env.prod/
-
 
 # shellcheck disable=SC2164
 #cd /backend/.env_files/.env.prod/

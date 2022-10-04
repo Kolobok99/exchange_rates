@@ -1,51 +1,51 @@
 version: '3'
 
-
 volumes:
-  prod_mysql_data:
-  prod_static_volume:
-
+  mysql_data:
 
 services:
   web:
-#    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../backend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.local.dev
     command: bash -c "
       python manage.py migrate
-      && python manage.py initadmin
       && python manage.py collectstatic --noinput
+      && python manage.py initadmin
       && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
       "
-    volumes:
-      - prod_static_volume:/web/static
     expose:
       - 8000
     env_file:
       - ../backend/.env_files/.env.dev/.env.dev.settings
+    volumes:
+      - ../backend:/app
     depends_on:
       - db
     restart: always
-    entrypoint: ./scripts/wait_db.sh
+
+
+#  test:
+#    command: python manage.py test
+#    restart: "no"
+
 
   db:
     image: mysql:latest
+    restart: always
     volumes:
-      - prod_mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - '3306:3306'
     env_file:
       - ../backend/.env_files/.env.dev/.env.dev.db
-    restart: always
 
   nginx:
-    build: ../nginx_files/nginx.prod
+    build: ../nginx_files/nginx.local.dev
     ports:
       - "80:80"
-    volumes:
-      - prod_static_volume:/web/static
     depends_on:
       - web
+    volumes:
+      - ../backend/static:/app/static
     restart: always
-
