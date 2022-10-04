@@ -43,11 +43,12 @@ services:
 
 
   nginx:
+    image: nginx:latest
     container_name: dev_ci_nginx
-    build: ../nginx_files/nginx.ci.dev
     ports:
       - '80:80'
     volumes:
+      - ../nginx_files/nginx.ci.dev/nginx.conf:/etc/nginx/conf.d/default.conf
       - dev_static_volume:/app/static
     depends_on:
       - web
