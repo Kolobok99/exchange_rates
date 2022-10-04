@@ -32,7 +32,8 @@ build:
     - bash ./backend/scripts/setup_prod_env.sh
     - pwd
 #    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#  script:
+  script:
+    - echo "END"
 #    - ${D_C_PROD} build
 #    - ${D_C_PROD} up
 
