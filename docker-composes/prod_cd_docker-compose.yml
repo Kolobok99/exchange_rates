@@ -10,7 +10,7 @@ volumes:
 services:
   web:
     container_name: prod_cd_web
-    image: registry.gitlab.com/your_username/your_project_name:latest
+    image: registry.gitlab.com/izolotavin99/exchange_rates_project:latest
     build:
       context: ../backend
       dockerfile: Dockerfile.prod
