@@ -24,9 +24,11 @@ build:
   stage: build
   before_script:
     - apk add --no-cache bash
+    - apk add --no-cache cat
     - chmod +x ./backend/scripts/setup_prod_env.sh
     - bash ./backend/scripts/setup_prod_env.sh
     - cd ./backend/.env_files/.env.prod/
+    - cat .env.prod.settings
 #    - pwd
 #    - mkdir ./backend/.env_files/.env.prod/
 #    - cd ./backend/.env_files/.env.prod/
