@@ -32,10 +32,8 @@ before_script:
   - export NGINX_IMAGE=$IMAGE:nginx
 
   - apk add --no-cache bash
-  - mkdir ./backend/.env_files/.env.prod/
-  - echo DEBUG=0 >> ./backend/.env_files/.env.prod/.env.prod.settings
   - chmod +x ./backend/scripts/setup_prod_env.sh
-  - bash ./backend/scripts/setup_prod_env.sh
+  - sh ./backend/scripts/setup_prod_env.sh
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 
