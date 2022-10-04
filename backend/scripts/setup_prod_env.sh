@@ -3,6 +3,10 @@
 # shellcheck disable=SC2164
 #cd /backend/.env_files/.env.prod/
 
+mkdir "/backend/.env_files/.env.prod/"
+
+ls ./backend/.env_files/
+
 echo DEBUG=0 >> ./backend/.env_files/.env.prod/.env.prod.settings
 #
 echo SECRET_KEY=$PROD_SECRET_KEY >> ./backend/.env_files/.env.prod/.env.prod.settings
