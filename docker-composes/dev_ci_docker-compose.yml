@@ -1,6 +1,4 @@
 version: '3'
-
-
 volumes:
   dev_web_data:
   dev_mysql_data:
@@ -45,7 +43,7 @@ services:
   nginx:
     build: ../nginx_files/nginx.ci.dev
     ports:
-      - "80:80"
+      - '80:80'
     volumes:
       - dev_static_volume:/app/static
     depends_on:

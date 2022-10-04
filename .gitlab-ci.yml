@@ -19,16 +19,15 @@ stages:
 
 test:
   stage: test
-#  before_script:
-#    - ${D_C_DEV} up -d --build
-#  script:
-#    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
-#  tags:
-#    - docker
+  before_script:
+    - ${D_C_DEV} up -d --build
   script:
-    - ${D_C_DEV} up --build
+    - ${D_C_DEV} exec web bash -c " scripts/wait_db.sh && python manage.py test"
+  tags:
+    - docker
 
-    #build:
+
+#build:
 #  stage: build
 #  before_script:
 #    - apk add --no-cache bash
