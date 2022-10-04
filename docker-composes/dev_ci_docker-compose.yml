@@ -7,6 +7,7 @@ volumes:
 
 services:
   web:
+    container_name: dev_ci_web
 #    image: registry.gitlab.com/izolotavin99/exchange_rates_project:latest
     build:
       context: ../backend
@@ -30,6 +31,7 @@ services:
     entrypoint: ./scripts/wait_db.sh
 
   db:
+    container_name: dev_ci_db
     image: mysql:latest
     volumes:
       - dev_mysql_data:/var/lib/mysql
@@ -41,6 +43,7 @@ services:
 
 
   nginx:
+    container_name: dev_ci_nginx
     build: ../nginx_files/nginx.ci.dev
     ports:
       - '80:80'

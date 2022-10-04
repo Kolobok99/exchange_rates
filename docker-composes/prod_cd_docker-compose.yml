@@ -9,6 +9,7 @@ volumes:
 
 services:
   web:
+    container_name: prod_cd_web
 #    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../backend
@@ -32,6 +33,7 @@ services:
     entrypoint: ./scripts/wait_db.sh
 
   db:
+    container_name: prod_cd_db
     image: mysql:latest
     volumes:
       - prod_mysql_data:/var/lib/mysql
@@ -42,6 +44,7 @@ services:
     restart: always
 
   nginx:
+    container_name: prod_cd_nginx
     build: ../nginx_files/nginx.prod
     ports:
       - "80:80"
