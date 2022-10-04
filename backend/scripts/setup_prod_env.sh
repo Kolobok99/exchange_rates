@@ -3,7 +3,7 @@
 # shellcheck disable=SC2164
 #cd /backend/.env_files/.env.prod/
 
-mkdir -p ../.env_files/.env.prod
+mkdir  -p new
 
 #echo DEBUG=0 >> ../.env_files/.env.prod/.env.prod.settings
 ##
