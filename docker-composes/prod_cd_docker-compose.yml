@@ -10,7 +10,7 @@ volumes:
 services:
   web:
     container_name: prod_cd_web
-    image: https://gitlab.com/izolotavin99/exchange_rates_project
+#    image: https://gitlab.com/izolotavin99/exchange_rates_project
     build:
       context: ../backend
       dockerfile: Dockerfile.prod
