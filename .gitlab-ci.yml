@@ -25,13 +25,14 @@ build:
   before_script:
     - apk add --no-cache bash
     - chmod +x ./backend/scripts/setup_prod_env.sh
-    - pwd
-    - mkdir ./backend/.env_files/.env.prod/
+    - bash ./backend/scripts/setup_prod_env.sh
     - cd ./backend/.env_files/.env.prod/
-    - pwd
-    - bash ../../scripts/setup_prod_env.sh
-    - ls
-    - pwd
+#    - pwd
+#    - mkdir ./backend/.env_files/.env.prod/
+#    - cd ./backend/.env_files/.env.prod/
+#    - pwd
+#    - ls
+#    - pwd
 #    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - echo "END"
