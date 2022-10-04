@@ -29,6 +29,7 @@ build:
     - bash ./backend/scripts/setup_prod_env.sh
     - cd ./backend/.env_files/.env.prod/
     - cat .env.prod.settings
+
 #    - pwd
 #    - mkdir ./backend/.env_files/.env.prod/
 #    - cd ./backend/.env_files/.env.prod/
