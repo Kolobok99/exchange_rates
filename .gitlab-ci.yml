@@ -30,17 +30,9 @@ build:
     - cd ./backend/.env_files/.env.prod/
     - cat .env.prod.settings
     - cat .env.prod.db
-
-#    - pwd
-#    - mkdir ./backend/.env_files/.env.prod/
-#    - cd ./backend/.env_files/.env.prod/
-#    - pwd
-#    - ls
-#    - pwd
 #    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - echo "END"
-#    - ${D_C_PROD} build
+    - ${D_C_PROD} up --build
 #    - ${D_C_PROD} up
 
 
