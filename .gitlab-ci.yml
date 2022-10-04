@@ -27,9 +27,9 @@ build:
 #    - apk add --no-cache cat
     - chmod +x ./backend/scripts/setup_prod_env.sh
     - bash ./backend/scripts/setup_prod_env.sh
-    - cd ./backend/.env_files/.env.prod/
-    - cat .env.prod.settings
-    - cat .env.prod.db
+#    - cd ./backend/.env_files/.env.prod/
+#    - cat .env.prod.settings
+#    - cat .env.prod.db
 #    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - ${D_C_PROD} up --build
