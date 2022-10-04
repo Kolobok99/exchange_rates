@@ -31,16 +31,12 @@ before_script:
   - export DB_IMAGE=$IMAGE:db
   - export NGINX_IMAGE=$IMAGE:nginx
 
-#  - apk add --no-cache bash
+  - apk add --no-cache bash
 #  - apk add --no-cache openssh-client bash
-#  - chmod +x ./backend/scripts/setup_prod_env.sh
-#  - sh ./backend/scripts/setup_prod_env.sh
+  - chmod +x ./backend/scripts/setup_prod_env.sh
+  - sh ./backend/scripts/setup_prod_env.sh
   - ls -al
   - cd ./backend
-
-  - cd ./scripts
-  - ls -al
-  - mkdir ../.env_files/.env.prod
 
   - ls -al
   - cd ../.env_files
