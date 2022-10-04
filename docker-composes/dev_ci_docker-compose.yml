@@ -8,7 +8,7 @@ volumes:
 services:
   web:
     container_name: dev_ci_web
-#    image: registry.gitlab.com/izolotavin99/exchange_rates_project:latest
+    image: registry.gitlab.com/izolotavin99/exchange_rates_project:latest
     build:
       context: ../backend
       dockerfile: Dockerfile.ci.dev
