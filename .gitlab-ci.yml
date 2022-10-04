@@ -31,8 +31,8 @@ before_script:
   - export DB_IMAGE=$IMAGE:db
   - export NGINX_IMAGE=$IMAGE:nginx
 
-#  - apk add --no-cache bash
-  - apk add --no-cache openssh-client bash
+  - apk add --no-cache bash
+#  - apk add --no-cache openssh-client bash
   - chmod +x ./backend/scripts/setup_prod_env.sh
   - sh ./backend/scripts/setup_prod_env.sh
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
