@@ -37,7 +37,7 @@ before_script:
   - ls -al
   - cd ./backend
   - ls -al
-  - cd ./env.files
+  - cd ./.env_files
   - ls -al
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
