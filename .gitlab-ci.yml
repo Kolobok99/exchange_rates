@@ -1,42 +1,71 @@
 image: docker:latest
+
 services:
-  - docker:dind
+  - test
 
-stages:
-  - build
-  - deploy
-before_script:
-  - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
-  - export WEB_IMAGE=$IMAGE:web
-#  - export DB_IMAGE=$IMAGE:db
-  - export NGINX_IMAGE=$IMAGE:nginx
+test:
+  stage: test
+  before_script:
+    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+    - export WEB_IMAGE=$IMAGE:web
+    - export NGINX_IMAGE=$IMAGE:nginx
 
-  - apk add --no-cache bash
-  - chmod +x ./backend/scripts/setup_prod_env.sh
-  - sh ./backend/scripts/setup_prod_env.sh
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - apk add --no-cache bash
+    - chmod +x ./backend/scripts/setup_prod_env.sh
+    - sh ./backend/scripts/setup_prod_env.sh
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker-compose -f ./docker-composes/docker-compose.ci.yml build
+    - docker-compose -f ./docker-composes/docker-compose.ci.yml up -d
+    - sh ./backend/scripts/wait_db.sh
+    - docker-compose -f ./docker-composes/docker-compose.ci.yml exec db bash -c "mysql -u root -p$PROD_SQL_ROOT_PASSWORD -e 'GRANT ALL PRIVILEGES ON test_$PROD_SQL_NAME.*   TO $PROD_SQL_USER;'"
+    - docker-compose -f ./docker-composes/docker-compose.ci.yml exec web bash -c "python manage.py test"
 
 
+    #image: docker:latest
+#services:
+#  - docker:dind
+#
+#stages:
+#  - build
+#  - test
+#  - deploy
+#before_script:
+#  - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+#  - export WEB_IMAGE=$IMAGE:web
+#  - export NGINX_IMAGE=$IMAGE:nginx
+#
+#  - apk add --no-cache bash
+#  - chmod +x ./backend/scripts/setup_prod_env.sh
+#  - sh ./backend/scripts/setup_prod_env.sh
+#  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#
+#
 #build:
 #  stage: build
 #  script:
-##    - docker pull $IMAGE:web || true
-##    - docker pull $IMAGE:db || true
-##    - docker pull $IMAGE:nginx || true
 #    - docker-compose -f ./docker-composes/docker-compose.ci.yml build
 #    - docker images
 #    - docker push $IMAGE:web
-##    - docker push $IMAGE:db
 #    - docker push $IMAGE:nginx
 #  tags:
 #    - docker
-
-deploy:
-  stage: deploy
-  script:
-    - docker pull $IMAGE:web
-    - docker pull $IMAGE:nginx
-    - docker-compose -f ./docker-composes/docker-compose.prod.yml up
+#
+#test:
+#  stage: test
+#  before_script:
+#    - docker pull $IMAGE:web
+#    - docker pull $IMAGE:nginx
+#    - docker-compose -f ./docker-composes/docker-compose.ci.yml up -d
+#    - docker-compose exec db bash -c 'mysql -u ${} -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';"'
+#
+#
+#deploy:
+#  stage: deploy
+#  script:
+#    - docker pull $IMAGE:web
+#    - docker pull $IMAGE:nginx
+#    - docker-compose -f ./docker-composes/docker-compose.prod.yml up
 
 
 # ------------------------------------------------

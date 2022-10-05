@@ -78,6 +78,9 @@ DATABASES = {
         'PASSWORD': os.environ.get('SQL_PASSWORD', default='12345'),
         'HOST': os.environ.get('SQL_HOST', default='db'),
         'PORT': os.environ.get('SQL_PORT', default='3306'),
+        # 'TEST': {
+        #     'NAME': 'exchange_rates_test',
+        # },
     }
 }
 

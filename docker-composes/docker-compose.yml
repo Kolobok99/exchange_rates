@@ -39,3 +39,33 @@ services:
       - MYSQL_DATABASE=dev_db
 volumes:
   mysql_data:
+
+# GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';
+
+# mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';"
+# mysql -u root -proot_password -e 'GRANT ALL PRIVILEGES ON test_dev_db.*   TO `manager`@`%`;'
+# mysql -u root -proot_password -e 'GRANT ALL PRIVILEGES ON test_dev_db.*   TO "manager"@"%";'
+# mysql -u root -proot_password -e 'GRANT ALL PRIVILEGES ON test_dev_db.*   TO `manager`@`%`;'
+
+
+# bash -c "mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';""
+# bash -c "mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO"    "
+# bash -c "mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO"    "
+# bash -c "mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO"    "
+# bash -c "mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO"    "
+
+
+# docker-compose exec db bash -c 'mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';"'
+
+
+
+# GRANT ALL PRIVILEGES ON test_dev_db.*   TO 'manager'@'%';
+# GRANT ALL PRIVILEGES ON test_dev_db.*   TO `manager`@`%`;
+# GRANT ALL PRIVILEGES ON test_dev_db.*   TO "manager"@"%";
+# GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;
+
+
+# mysql -u root -proot_password -e '# GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;'
+# mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;"
+
+# docker-compose exec db bash -c "mysql -u root -proot_password -e 'GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;'"
