@@ -22,14 +22,11 @@ services:
       - db
 
   db:
-    build:
-      cache_from:
-        - "${DB_IMAGE}"
     image: "${DB_IMAGE}"
     volumes:
       - prod_mysql_data:/var/lib/mysql
-#    ports:
-#      - '3306:3306'
+    ports:
+      - '3306:3306'
     env_file:
       - ../backend/.env_files/.env.files/.env.prod.db
 
