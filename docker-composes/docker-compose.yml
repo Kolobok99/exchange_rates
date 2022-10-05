@@ -19,8 +19,8 @@ services:
       - SECRET_KEY=very_secret_key
       - SQL_ENGINE=django.db.backends.mysql
       - SQL_NAME=dev_db
-      - SQL_USER=manager
-      - SQL_PASSWORD=password
+      - SQL_USER=root
+      - SQL_PASSWORD=root_password
       - SQL_HOST=db
       - SQL_PORT=3306
       - DATABASE=mysql
@@ -33,10 +33,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      - MYSQL_USER=manager
-      - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=root_password
       - MYSQL_DATABASE=dev_db
+
 volumes:
   mysql_data:
 
@@ -69,3 +68,5 @@ volumes:
 # mysql -u root -proot_password -e "GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;"
 
 # docker-compose exec db bash -c "mysql -u root -proot_password -e 'GRANT ALL PRIVILEGES ON test_dev_db.*   TO manager;'"
+
+# echo 'GRANT ALL on *.* to "manager;"'| mysql -u root --password="root_password" -h mysql
