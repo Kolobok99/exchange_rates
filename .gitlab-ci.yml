@@ -35,7 +35,10 @@ before_script:
 #  - apk add --no-cache openssh-client bash
   - chmod +x ./backend/scripts/setup_prod_env.sh
   - sh ./backend/scripts/setup_prod_env.sh
-  - cd ./backend/scripts
+  - ls -al
+  - cd backends
+  - ls al
+  - cd ./scripts
   - ls -al
 
 #  - ls -al
