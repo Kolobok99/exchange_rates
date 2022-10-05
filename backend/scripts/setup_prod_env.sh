@@ -17,8 +17,8 @@ echo SQL_PASSWORD=$PROD_SQL_PASSWORD >> ./backend/.env_files/.env.prod/.env.prod
 echo SQL_HOST=$PROD_SQL_HOST >> ./backend/.env_files/.env.prod/.env.prod.settings
 echo SQL_PORT=$PROD_SQL_PORT >> ./backend/.env_files/.env.prod/.env.prod.settings
 #
-echo MYSQL_DATABASE=$PROD_SQL_NAME >> ./backend/.env_files/.env.prod.env.prod.db
-echo MYSQL_USER=$PROD_SQL_USER >> ./backend/.env_files/.env.prod.env.prod.db
+echo MYSQL_DATABASE=$PROD_SQL_NAME >> ./backend/.env_files/.env.prod/.env.prod.db
+echo MYSQL_USER=$PROD_SQL_USER >> ./backend/.env_files/.env.prod/.env.prod.db
 echo MYSQL_PORT=$PROD_SQL_PORT >> ./backend/.env_files/.env.prod/.env.prod.db
 echo MYSQL_PASSWORD=$PROD_SQL_PASSWORD >> ./backend/.env_files/.env.prod/.env.prod.db
 echo MYSQL_ROOT_PASSWORD=$PROD_SQL_ROOT_PASSWORD >> ./backend/.env_files/.env.prod/.env.prod.db
