@@ -39,6 +39,7 @@ services:
   nginx:
     build:
       context: ../nginx_files/nginx.prod
+    image: "${NGINX_IMAGE}"
     volumes:
       - prod_static_volume:/web/static
     ports:
