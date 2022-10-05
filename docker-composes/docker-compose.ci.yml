@@ -9,8 +9,6 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile.prod
-      cache_from:
-        - "${WEB_IMAGE}"
     image: "${WEB_IMAGE}"
     command: bash -c "
       python manage.py migrate
@@ -26,27 +24,21 @@ services:
 #    depends_on:
 #      - db
 
-#  db:
-#    build:
-#      cache_from:
-#        - "${DB_IMAGE}"
-#    image: "${DB_IMAGE}"
-#    volumes:
-#      - prod_mysql_data:/var/lib/mysql
-#    ports:
-#      - '3306:3306'
-#    env_file:
-#      - ../backend/.env_files/.env.prod/.env.prod.db
-#    depends_on:
-#      - web
-#
+  db:
+    image: mysql:latest
+    volumes:
+      - prod_mysql_data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    env_file:
+      - ../backend/.env_files/.env.prod/.env.prod.db
+    depends_on:
+      - web
+
 
   nginx:
     build:
       context: ../nginx_files/nginx.prod
-      cache_from:
-        - "${NGINX_IMAGE}"
-    image: "${NGINX_IMAGE}"
     volumes:
       - prod_static_volume:/web/static
     ports:
