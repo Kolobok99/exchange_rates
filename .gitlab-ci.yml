@@ -25,6 +25,7 @@ test:
     - docker-compose -f ./docker-composes/docker-compose.ci.yml exec web bash -c "python manage.py test"
 
 
+
     #image: docker:latest
 #services:
 #  - docker:dind
