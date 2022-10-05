@@ -1,7 +1,7 @@
 version: "3.8"
 
 volumes:
-  prod_mysql_data:
+#  prod_mysql_data:
   prod_static_volume:
 
 services:
@@ -26,20 +26,20 @@ services:
     depends_on:
       - db
 
-  db:
-    build:
-      cache_from:
-        - "${DB_IMAGE}"
-    image: "${DB_IMAGE}"
-    volumes:
-      - prod_mysql_data:/var/lib/mysql
-    ports:
-      - '3306:3306'
-    env_file:
-      - ../backend/.env_files/.env.prod/.env.prod.db
-    depends_on:
-      - web
-
+#  db:
+#    build:
+#      cache_from:
+#        - "${DB_IMAGE}"
+#    image: "${DB_IMAGE}"
+#    volumes:
+#      - prod_mysql_data:/var/lib/mysql
+#    ports:
+#      - '3306:3306'
+#    env_file:
+#      - ../backend/.env_files/.env.prod/.env.prod.db
+#    depends_on:
+#      - web
+#
 
   nginx:
     build:
