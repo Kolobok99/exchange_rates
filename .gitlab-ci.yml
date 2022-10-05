@@ -24,9 +24,10 @@ build:
 #    - docker pull $IMAGE:db || true
 #    - docker pull $IMAGE:nginx || true
     - docker-compose -f ./docker-composes/docker-compose.ci.yml build
+    - docker images
     - docker push $IMAGE:web
 #    - docker push $IMAGE:db
-#    - docker push $IMAGE:nginx
+    - docker push $IMAGE:nginx
   tags:
     - docker
 
