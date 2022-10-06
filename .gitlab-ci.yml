@@ -4,65 +4,86 @@ services:
   - docker:dind
 
 stages:
-#  - test
-  - build
-  - deploy
+  - test
 
+test:
+  stage: test
+  before_script:
+    - docker-compose -f docker-composes/docker-compose.yml build
+  script:
+    - docker-compose -f docker-composes/docker-compose.yml up
+
+
+# -------------------------------------------------
+
+      ##############################
+      #       LAST WORK VERSION    #
+      ##############################
+#image: docker:latest
+#
+#services:
+#  - docker:dind
+#
+#stages:
+##  - test
+#  - build
+#  - deploy
+#
 #test:
 #  stage: test
 #  before_script:
 #    - docker-compose -f docker-composes/docker-compose.yml up -d --build
 #  script:
 #    - docker-compose -f docker-composes/docker-compose.yml exec web bash -c " scripts/wait_db.sh && python manage.py test"
+#
+#
+#build:
+#  stage: build
+#  before_script:
+#    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+#    - export WEB_IMAGE=$IMAGE:web
+#    - export NGINX_IMAGE=$IMAGE:nginx
+#
+#    - apk add --no-cache bash
+#    - chmod +x ./backend/scripts/setup_prod_env.sh
+#    - sh ./backend/scripts/setup_prod_env.sh
+#
+#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#
+#  script:
+#    - docker-compose -f ./docker-composes/docker-compose.ci.yml build
+#    - docker images
+#    - docker push $IMAGE:web
+#    - docker push $IMAGE:nginx
+#
+#deploy:
+#  stage: deploy
+#  before_script:
+#    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+#    - export WEB_IMAGE=$IMAGE:web
+#    - export NGINX_IMAGE=$IMAGE:nginx
+#
+#    - apk add --no-cache bash
+#    - chmod +x ./backend/scripts/setup_prod_env.sh
+#    - sh ./backend/scripts/setup_prod_env.sh
+#
+#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#
+#  script:
+#    - docker images
+#
+#    - docker pull $IMAGE:web
+#    - docker pull $IMAGE:nginx
+#
+#    - docker images
+#
+#    - docker-compose -f ./docker-composes/docker-compose.prod.yml up --build
 
 
-build:
-  stage: build
-  before_script:
-    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
-    - export WEB_IMAGE=$IMAGE:web
-    - export NGINX_IMAGE=$IMAGE:nginx
-
-    - apk add --no-cache bash
-    - chmod +x ./backend/scripts/setup_prod_env.sh
-    - sh ./backend/scripts/setup_prod_env.sh
-
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
-  script:
-    - docker-compose -f ./docker-composes/docker-compose.ci.yml build
-    - docker images
-    - docker push $IMAGE:web
-    - docker push $IMAGE:nginx
-
-deploy:
-  stage: deploy
-  before_script:
-    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
-    - export WEB_IMAGE=$IMAGE:web
-    - export NGINX_IMAGE=$IMAGE:nginx
-
-    - apk add --no-cache bash
-    - chmod +x ./backend/scripts/setup_prod_env.sh
-    - sh ./backend/scripts/setup_prod_env.sh
-
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
-  script:
-    - docker images
-
-    - docker pull $IMAGE:web
-    - docker pull $IMAGE:nginx
-
-    - docker images
-
-    - docker-compose -f ./docker-composes/docker-compose.prod.yml up --build
 
 
 
-
-
-    #image: docker:latest
+#image: docker:latest
 #
 #services:
 #  - docker:dind
