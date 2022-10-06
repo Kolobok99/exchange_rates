@@ -17,3 +17,4 @@ RUN apt-get update \
 
 RUN chmod +x /app/scripts/wait_db.sh
 
+EXPOSE 8000
