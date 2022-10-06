@@ -6,6 +6,9 @@ volumes:
 
 services:
   web:
+#    build:
+#      context: ../backend
+#      dockerfile: Dockerfile.prod
     image: "${WEB_IMAGE}"
     command: bash -c "
       python manage.py migrate
@@ -32,11 +35,13 @@ services:
 
 
   nginx:
+#    build:
+#      context: ../nginx_files/nginx.prod
     image: "${NGINX_IMAGE}"
     volumes:
       - prod_static_volume:/web/static
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - web
 
