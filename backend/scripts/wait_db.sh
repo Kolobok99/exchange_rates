@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "STARTING WAIT DB!!!!"
 
 if [ "$DATABASE" = "mysql" ]
 then
