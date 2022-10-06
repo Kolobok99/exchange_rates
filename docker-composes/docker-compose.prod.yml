@@ -14,7 +14,7 @@ services:
       python manage.py migrate
       && python manage.py initadmin
       && python manage.py collectstatic --noinput
-      && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
+      && python manage.py runserver 0.0.0.0:8000
       "
     volumes:
       - prod_static_volume:/web/static
