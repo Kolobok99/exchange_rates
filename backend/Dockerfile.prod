@@ -68,7 +68,7 @@ RUN apt-get update \
     && useradd -m -g app app -p PASSWORD \
     && usermod -aG app app \
     \
-#    && mkdir $APP_DIR/static \
+    && mkdir $APP_DIR/static \
     \
     && apt-get install -y netcat \
     && pip install -r req.txt \
