@@ -12,7 +12,7 @@ test:
     - docker-compose -f docker-composes/docker-compose.yml up -d --build
   script:
     - docker-compose -f docker-composes/docker-compose.yml exec web bash -c " scripts/wait_db.sh && python manage.py test"
-    #image: docker:latest
+#image: docker:latest
 #
 #services:
 #  - docker:dind
