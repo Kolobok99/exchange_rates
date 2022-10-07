@@ -30,6 +30,7 @@ services:
       - db
     entrypoint: ./scripts/wait_db.sh
 
+
   db:
     image: mysql:latest
     volumes:
