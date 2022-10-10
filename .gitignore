@@ -6,3 +6,4 @@ backend/logs
 /backend/static/
 /backend/.env_files/.env.prod/
 /ci/ci_02.10.yml
+/docker-composes/docker-compose.test.prod.yml
