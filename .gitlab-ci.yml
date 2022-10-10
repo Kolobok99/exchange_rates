@@ -9,17 +9,19 @@ services:
   - docker:dind
 
 stages:
-#  - test
+  - test
   - build
   - deploy
 
-#test:
-#  stage: test
-#  before_script:
-#    - docker-compose -f docker-composes/docker-compose.yml up -d --build
-#  script:
-#    - docker-compose -f docker-composes/docker-compose.yml exec web bash -c " scripts/wait_db.sh && python manage.py test"
+test:
+  stage: test
+  before_script:
+    - docker-compose -f docker-composes/docker-compose.yml up -d --build
+  script:
+    - docker-compose -f docker-composes/docker-compose.yml exec web bash -c " scripts/wait_db.sh && python manage.py test"
 
+  tags:
+    - docker
 
 build:
   stage: build
@@ -39,6 +41,9 @@ build:
     - docker images
     - docker push $IMAGE:web
     - docker push $IMAGE:nginx
+
+  tags:
+    - docker
 
 deploy:
   stage: deploy
